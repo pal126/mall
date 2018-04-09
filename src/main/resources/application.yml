@@ -4,15 +4,14 @@ server:
 
 spring:
     datasource:
-        name:
-        url: jdbc:mysql://127.0.0.1:3306/
+        url: jdbc:mysql://127.0.0.1:3306/mall
         username: root
         password: root
         driver-class-name: com.mysql.jdbc.Driver
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml
-  type-aliases-package:
+  type-aliases-package: com.pal.mall.entity
 
 #pagehelper分页插件
 pagehelper:
