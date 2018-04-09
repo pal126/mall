@@ -1,0 +1,22 @@
+
+server:
+  port: 8080
+
+spring:
+    datasource:
+        name:
+        url: jdbc:mysql://127.0.0.1:3306/
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package:
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
