@@ -37,8 +37,8 @@ public class ServerResponse<T> implements Serializable {
         this.msg = msg;
     }
 
-    @JsonIgnore
     //使之不在json序列化结果当中
+    @JsonIgnore
     public boolean isSuccess(){
         return this.status == ResponseCode.SUCCESS.getCode();
     }
@@ -68,7 +68,6 @@ public class ServerResponse<T> implements Serializable {
     public static <T> ServerResponse<T> createBySuccess(String msg,T data){
         return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(),msg,data);
     }
-
 
     public static <T> ServerResponse<T> createByError(){
         return new ServerResponse<T>(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());
