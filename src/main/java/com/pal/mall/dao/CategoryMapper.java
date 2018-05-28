@@ -1,9 +1,11 @@
 package com.pal.mall.dao;
 
 import com.pal.mall.pojo.Category;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface CategoryMapper {
     int deleteByPrimaryKey(Integer id);
 

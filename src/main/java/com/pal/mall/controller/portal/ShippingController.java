@@ -1,11 +1,11 @@
 package com.pal.mall.controller.portal;
 
 import com.github.pagehelper.PageInfo;
-import com.mmall.pojo.Shipping;
-import com.mmall.pojo.User;
 import com.pal.mall.common.Const;
 import com.pal.mall.common.ResponseCode;
 import com.pal.mall.common.ServerResponse;
+import com.pal.mall.pojo.Shipping;
+import com.pal.mall.pojo.User;
 import com.pal.mall.service.IShippingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

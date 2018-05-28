@@ -4,11 +4,11 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.demo.trade.config.Configs;
 import com.google.common.collect.Maps;
-import com.mmall.pojo.User;
-import com.mmall.service.IOrderService;
 import com.pal.mall.common.Const;
 import com.pal.mall.common.ResponseCode;
 import com.pal.mall.common.ServerResponse;
+import com.pal.mall.pojo.User;
+import com.pal.mall.service.IOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,14 +99,12 @@ public class OrderController {
     @ResponseBody
     public Object alipayCallback(HttpServletRequest request){
         Map<String,String> params = Maps.newHashMap();
-
         Map requestParams = request.getParameterMap();
         for(Iterator iter = requestParams.keySet().iterator();iter.hasNext();){
             String name = (String)iter.next();
             String[] values = (String[]) requestParams.get(name);
             String valueStr = "";
             for(int i = 0 ; i <values.length;i++){
-
                 valueStr = (i == values.length -1)?valueStr + values[i]:valueStr + values[i]+",";
             }
             params.put(name,valueStr);

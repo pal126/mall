@@ -1,8 +1,10 @@
 package com.pal.mall.dao;
 
 import com.pal.mall.pojo.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 

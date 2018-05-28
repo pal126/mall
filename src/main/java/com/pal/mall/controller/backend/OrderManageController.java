@@ -1,13 +1,13 @@
 package com.pal.mall.controller.backend;
 
 import com.github.pagehelper.PageInfo;
-import com.mmall.pojo.User;
-import com.mmall.service.IOrderService;
-import com.mmall.service.IUserService;
-import com.mmall.vo.OrderVo;
 import com.pal.mall.common.Const;
 import com.pal.mall.common.ResponseCode;
 import com.pal.mall.common.ServerResponse;
+import com.pal.mall.pojo.User;
+import com.pal.mall.service.IOrderService;
+import com.pal.mall.service.IUserService;
+import com.pal.mall.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +55,6 @@ public class OrderManageController {
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             //填充我们增加产品的业务逻辑
-
             return iOrderService.manageDetail(orderNo);
         }else{
             return ServerResponse.createByErrorMessage("无权限操作");
