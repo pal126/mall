@@ -1,12 +1,12 @@
-package com.mmall.service;
+package com.pal.mall.service;
 
 import com.github.pagehelper.PageInfo;
-import com.mmall.common.ServerResponse;
-import com.mmall.pojo.Product;
-import com.mmall.vo.ProductDetailVo;
+import com.pal.mall.common.ServerResponse;
+import com.pal.mall.pojo.Product;
+import com.pal.mall.vo.ProductDetailVo;
 
 /**
- * Created by geely
+ * Created by pal
  */
 public interface IProductService {
 
@@ -22,8 +22,6 @@ public interface IProductService {
 
     ServerResponse<ProductDetailVo> getProductDetail(Integer productId);
 
-    ServerResponse<PageInfo> getProductByKeywordCategory(String keyword,Integer categoryId,int pageNum,int pageSize,String orderBy);
-
-
+    ServerResponse<PageInfo> getProductByKeywordCategory(String keyword, Integer categoryId, int pageNum, int pageSize, String orderBy);
 
 }

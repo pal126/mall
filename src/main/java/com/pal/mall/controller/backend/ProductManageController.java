@@ -1,15 +1,15 @@
-package com.mmall.controller.backend;
+package com.pal.mall.controller.backend;
 
 import com.google.common.collect.Maps;
-import com.mmall.common.Const;
-import com.mmall.common.ResponseCode;
-import com.mmall.common.ServerResponse;
 import com.mmall.pojo.Product;
 import com.mmall.pojo.User;
 import com.mmall.service.IFileService;
-import com.mmall.service.IProductService;
 import com.mmall.service.IUserService;
 import com.mmall.util.PropertiesUtil;
+import com.pal.mall.common.Const;
+import com.pal.mall.common.ResponseCode;
+import com.pal.mall.common.ServerResponse;
+import com.pal.mall.service.IProductService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +24,8 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
- * Created by geely
+ * Created by pal
  */
-
 @Controller
 @RequestMapping("/manage/product")
 public class ProductManageController {
@@ -44,7 +43,6 @@ public class ProductManageController {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             //填充我们增加产品的业务逻辑
@@ -60,7 +58,6 @@ public class ProductManageController {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             return iProductService.setSaleStatus(productId,status);
@@ -75,7 +72,6 @@ public class ProductManageController {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             //填充业务
@@ -92,7 +88,6 @@ public class ProductManageController {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             //填充业务
@@ -108,7 +103,6 @@ public class ProductManageController {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             //填充业务
@@ -129,7 +123,6 @@ public class ProductManageController {
             String path = request.getSession().getServletContext().getRealPath("upload");
             String targetFileName = iFileService.upload(file,path);
             String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
-
             Map fileMap = Maps.newHashMap();
             fileMap.put("uri",targetFileName);
             fileMap.put("url",url);
@@ -138,7 +131,6 @@ public class ProductManageController {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
     }
-
 
     @RequestMapping("richtext_img_upload.do")
     @ResponseBody
@@ -176,33 +168,4 @@ public class ProductManageController {
             return resultMap;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

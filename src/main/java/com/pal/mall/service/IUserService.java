@@ -1,10 +1,10 @@
-package com.mmall.service;
+package com.pal.mall.service;
 
-import com.mmall.common.ServerResponse;
-import com.mmall.pojo.User;
+import com.pal.mall.common.ServerResponse;
+import com.pal.mall.pojo.User;
 
 /**
- * Created by geely
+ * Created by pal
  */
 public interface IUserService {
 

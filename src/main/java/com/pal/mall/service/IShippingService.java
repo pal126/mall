@@ -1,11 +1,11 @@
-package com.mmall.service;
+package com.pal.mall.service;
 
 import com.github.pagehelper.PageInfo;
-import com.mmall.common.ServerResponse;
-import com.mmall.pojo.Shipping;
+import com.pal.mall.common.ServerResponse;
+import com.pal.mall.pojo.Shipping;
 
 /**
- * Created by geely
+ * Created by pal
  */
 public interface IShippingService {
 

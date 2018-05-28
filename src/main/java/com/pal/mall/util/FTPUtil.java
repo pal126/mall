@@ -1,4 +1,4 @@
-package com.mmall.util;
+package com.pal.mall.util;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.slf4j.Logger;
@@ -10,12 +10,11 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by geely
+ * Created by pal
  */
 public class FTPUtil {
 
     private static  final Logger logger = LoggerFactory.getLogger(FTPUtil.class);
-
     private static String ftpIp = PropertiesUtil.getProperty("ftp.server.ip");
     private static String ftpUser = PropertiesUtil.getProperty("ftp.user");
     private static String ftpPass = PropertiesUtil.getProperty("ftp.pass");
@@ -26,6 +25,7 @@ public class FTPUtil {
         this.user = user;
         this.pwd = pwd;
     }
+
     public static boolean uploadFile(List<File> fileList) throws IOException {
         FTPUtil ftpUtil = new FTPUtil(ftpIp,21,ftpUser,ftpPass);
         logger.info("开始连接ftp服务器");
@@ -33,7 +33,6 @@ public class FTPUtil {
         logger.info("开始连接ftp服务器,结束上传,上传结果:{}");
         return result;
     }
-
 
     private boolean uploadFile(String remotePath,List<File> fileList) throws IOException {
         boolean uploaded = true;
@@ -63,8 +62,6 @@ public class FTPUtil {
         return uploaded;
     }
 
-
-
     private boolean connectServer(String ip,int port,String user,String pwd){
 
         boolean isSuccess = false;
@@ -77,16 +74,6 @@ public class FTPUtil {
         }
         return isSuccess;
     }
-
-
-
-
-
-
-
-
-
-
 
     private String ip;
     private int port;

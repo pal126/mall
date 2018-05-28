@@ -1,8 +1,8 @@
-package com.mmall.service.impl;
+package com.pal.mall.service.impl;
 
 import com.google.common.collect.Lists;
-import com.mmall.service.IFileService;
-import com.mmall.util.FTPUtil;
+import com.pal.mall.service.IFileService;
+import com.pal.mall.util.FTPUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,14 +13,14 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
- * Created by geely
+ * Created by pal
  */
 @Service("iFileService")
 public class FileServiceImpl implements IFileService {
 
     private Logger logger = LoggerFactory.getLogger(FileServiceImpl.class);
 
-
+    @Override
     public String upload(MultipartFile file,String path){
         String fileName = file.getOriginalFilename();
         //扩展名
@@ -35,16 +35,11 @@ public class FileServiceImpl implements IFileService {
             fileDir.mkdirs();
         }
         File targetFile = new File(path,uploadFileName);
-
-
         try {
             file.transferTo(targetFile);
             //文件已经上传成功了
-
-
             FTPUtil.uploadFile(Lists.newArrayList(targetFile));
             //已经上传到ftp服务器上
-
             targetFile.delete();
         } catch (IOException e) {
             logger.error("上传文件异常",e);

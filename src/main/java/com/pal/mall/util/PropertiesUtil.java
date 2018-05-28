@@ -1,4 +1,4 @@
-package com.mmall.util;
+package com.pal.mall.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 /**
- * Created by geely
+ * Created by pal
  */
 public class PropertiesUtil {
 
@@ -36,14 +36,11 @@ public class PropertiesUtil {
     }
 
     public static String getProperty(String key,String defaultValue){
-
         String value = props.getProperty(key.trim());
         if(StringUtils.isBlank(value)){
             value = defaultValue;
         }
         return value.trim();
     }
-
-
 
 }

@@ -1,22 +1,21 @@
-package com.mmall.service.impl;
+package com.pal.mall.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
-import com.mmall.common.Const;
-import com.mmall.common.ResponseCode;
-import com.mmall.common.ServerResponse;
-import com.mmall.dao.CategoryMapper;
-import com.mmall.dao.ProductMapper;
-import com.mmall.pojo.Category;
-import com.mmall.pojo.Product;
-import com.mmall.service.ICategoryService;
-import com.mmall.service.IProductService;
-import com.mmall.util.DateTimeUtil;
-import com.mmall.util.PropertiesUtil;
-import com.mmall.vo.ProductDetailVo;
-import com.mmall.vo.ProductListVo;
+import com.pal.mall.common.Const;
+import com.pal.mall.common.ResponseCode;
+import com.pal.mall.common.ServerResponse;
+import com.pal.mall.dao.CategoryMapper;
+import com.pal.mall.dao.ProductMapper;
+import com.pal.mall.pojo.Category;
+import com.pal.mall.pojo.Product;
+import com.pal.mall.service.ICategoryService;
+import com.pal.mall.service.IProductService;
+import com.pal.mall.util.DateTimeUtil;
+import com.pal.mall.util.PropertiesUtil;
+import com.pal.mall.vo.ProductDetailVo;
+import com.pal.mall.vo.ProductListVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,11 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by geely
+ * Created by pal
  */
 @Service("iProductService")
 public class ProductServiceImpl implements IProductService {
-
 
     @Autowired
     private ProductMapper productMapper;
@@ -40,6 +38,7 @@ public class ProductServiceImpl implements IProductService {
     @Autowired
     private ICategoryService iCategoryService;
 
+    @Override
     public ServerResponse saveOrUpdateProduct(Product product){
         if(product != null)
         {
@@ -67,7 +66,7 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createByErrorMessage("新增或更新产品参数不正确");
     }
 
-
+    @Override
     public ServerResponse<String> setSaleStatus(Integer productId,Integer status){
         if(productId == null || status == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
@@ -82,7 +81,7 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createByErrorMessage("修改产品销售状态失败");
     }
 
-
+    @Override
     public ServerResponse<ProductDetailVo> manageProductDetail(Integer productId){
         if(productId == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
@@ -107,12 +106,12 @@ public class ProductServiceImpl implements IProductService {
         productDetailVo.setName(product.getName());
         productDetailVo.setStatus(product.getStatus());
         productDetailVo.setStock(product.getStock());
-
         productDetailVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.happymmall.com/"));
 
         Category category = categoryMapper.selectByPrimaryKey(product.getCategoryId());
         if(category == null){
-            productDetailVo.setParentCategoryId(0);//默认根节点
+            //默认根节点
+            productDetailVo.setParentCategoryId(0);
         }else{
             productDetailVo.setParentCategoryId(category.getParentId());
         }
@@ -122,8 +121,7 @@ public class ProductServiceImpl implements IProductService {
         return productDetailVo;
     }
 
-
-
+    @Override
     public ServerResponse<PageInfo> getProductList(int pageNum,int pageSize){
         //startPage--start
         //填充自己的sql查询逻辑
@@ -154,8 +152,7 @@ public class ProductServiceImpl implements IProductService {
         return productListVo;
     }
 
-
-
+    @Override
     public ServerResponse<PageInfo> searchProduct(String productName,Integer productId,int pageNum,int pageSize){
         PageHelper.startPage(pageNum,pageSize);
         if(StringUtils.isNotBlank(productName)){
@@ -172,7 +169,7 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createBySuccess(pageResult);
     }
 
-
+    @Override
     public ServerResponse<ProductDetailVo> getProductDetail(Integer productId){
         if(productId == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
@@ -188,7 +185,7 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createBySuccess(productDetailVo);
     }
 
-
+    @Override
     public ServerResponse<PageInfo> getProductByKeywordCategory(String keyword,Integer categoryId,int pageNum,int pageSize,String orderBy){
         if(StringUtils.isBlank(keyword) && categoryId == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
@@ -218,7 +215,8 @@ public class ProductServiceImpl implements IProductService {
                 PageHelper.orderBy(orderByArray[0]+" "+orderByArray[1]);
             }
         }
-        List<Product> productList = productMapper.selectByNameAndCategoryIds(StringUtils.isBlank(keyword)?null:keyword,categoryIdList.size()==0?null:categoryIdList);
+        List<Product> productList = productMapper.selectByNameAndCategoryIds(StringUtils.isBlank(keyword) ? null : keyword,
+                categoryIdList.size()==0 ? null : categoryIdList);
 
         List<ProductListVo> productListVoList = Lists.newArrayList();
         for(Product product : productList){
@@ -230,30 +228,4 @@ public class ProductServiceImpl implements IProductService {
         pageInfo.setList(productListVoList);
         return ServerResponse.createBySuccess(pageInfo);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

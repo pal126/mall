@@ -1,14 +1,14 @@
-package com.mmall.controller.portal;
+package com.pal.mall.controller.portal;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.demo.trade.config.Configs;
 import com.google.common.collect.Maps;
-import com.mmall.common.Const;
-import com.mmall.common.ResponseCode;
-import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IOrderService;
+import com.pal.mall.common.Const;
+import com.pal.mall.common.ResponseCode;
+import com.pal.mall.common.ServerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +23,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created by geely
+ * Created by pal
  */
-
 @Controller
 @RequestMapping("/order/")
 public class OrderController {
@@ -34,7 +33,6 @@ public class OrderController {
 
     @Autowired
     private IOrderService iOrderService;
-
 
     @RequestMapping("create.do")
     @ResponseBody
@@ -46,7 +44,6 @@ public class OrderController {
         return iOrderService.createOrder(user.getId(),shippingId);
     }
 
-
     @RequestMapping("cancel.do")
     @ResponseBody
     public ServerResponse cancel(HttpSession session, Long orderNo){
@@ -57,7 +54,6 @@ public class OrderController {
         return iOrderService.cancel(user.getId(),orderNo);
     }
 
-
     @RequestMapping("get_order_cart_product.do")
     @ResponseBody
     public ServerResponse getOrderCartProduct(HttpSession session){
@@ -67,8 +63,6 @@ public class OrderController {
         }
         return iOrderService.getOrderCartProduct(user.getId());
     }
-
-
 
     @RequestMapping("detail.do")
     @ResponseBody
@@ -89,29 +83,6 @@ public class OrderController {
         }
         return iOrderService.getOrderList(user.getId(),pageNum,pageSize);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @RequestMapping("pay.do")
     @ResponseBody
@@ -149,23 +120,19 @@ public class OrderController {
             boolean alipayRSACheckedV2 = AlipaySignature.rsaCheckV2(params, Configs.getAlipayPublicKey(),"utf-8",Configs.getSignType());
 
             if(!alipayRSACheckedV2){
-                return ServerResponse.createByErrorMessage("非法请求,验证不通过,再恶意请求我就报警找网警了");
+                return ServerResponse.createByErrorMessage("非法请求,验证不通过");
             }
         } catch (AlipayApiException e) {
             logger.error("支付宝验证回调异常",e);
         }
 
         //todo 验证各种数据
-
-
-        //
         ServerResponse serverResponse = iOrderService.aliCallback(params);
         if(serverResponse.isSuccess()){
             return Const.AlipayCallback.RESPONSE_SUCCESS;
         }
         return Const.AlipayCallback.RESPONSE_FAILED;
     }
-
 
     @RequestMapping("query_order_pay_status.do")
     @ResponseBody
@@ -181,23 +148,5 @@ public class OrderController {
         }
         return ServerResponse.createBySuccess(false);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

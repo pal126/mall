@@ -1,6 +1,6 @@
-package com.mmall.dao;
+package com.pal.mall.dao;
 
-import com.mmall.pojo.OrderItem;
+import com.pal.mall.pojo.OrderItem;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,9 +22,5 @@ public interface OrderItemMapper {
 
     List<OrderItem> getByOrderNo(@Param("orderNo")Long orderNo);
 
-
-
     void batchInsert(@Param("orderItemList") List<OrderItem> orderItemList);
-
-
 }

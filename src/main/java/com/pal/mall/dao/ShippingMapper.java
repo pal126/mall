@@ -1,6 +1,6 @@
-package com.mmall.dao;
+package com.pal.mall.dao;
 
-import com.mmall.pojo.Shipping;
+import com.pal.mall.pojo.Shipping;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,5 +25,4 @@ public interface ShippingMapper {
     Shipping selectByShippingIdUserId(@Param("userId")Integer userId,@Param("shippingId") Integer shippingId);
 
     List<Shipping> selectByUserId(@Param("userId")Integer userId);
-
 }

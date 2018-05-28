@@ -1,11 +1,11 @@
-package com.mmall.controller.portal;
+package com.pal.mall.controller.portal;
 
-import com.mmall.common.Const;
-import com.mmall.common.ResponseCode;
-import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
-import com.mmall.service.ICartService;
 import com.mmall.vo.CartVo;
+import com.pal.mall.common.Const;
+import com.pal.mall.common.ResponseCode;
+import com.pal.mall.common.ServerResponse;
+import com.pal.mall.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by geely
+ * Created by pal
  */
 @Controller
 @RequestMapping("/cart/")
@@ -22,8 +22,6 @@ public class CartController {
 
     @Autowired
     private ICartService iCartService;
-
-
 
     @RequestMapping("list.do")
     @ResponseBody
@@ -45,8 +43,6 @@ public class CartController {
         return iCartService.add(user.getId(),productId,count);
     }
 
-
-
     @RequestMapping("update.do")
     @ResponseBody
     public ServerResponse<CartVo> update(HttpSession session, Integer count, Integer productId){
@@ -66,7 +62,6 @@ public class CartController {
         }
         return iCartService.deleteProduct(user.getId(),productIds);
     }
-
 
     @RequestMapping("select_all.do")
     @ResponseBody
@@ -88,8 +83,6 @@ public class CartController {
         return iCartService.selectOrUnSelect(user.getId(),null,Const.Cart.UN_CHECKED);
     }
 
-
-
     @RequestMapping("select.do")
     @ResponseBody
     public ServerResponse<CartVo> select(HttpSession session,Integer productId){
@@ -110,8 +103,6 @@ public class CartController {
         return iCartService.selectOrUnSelect(user.getId(),productId,Const.Cart.UN_CHECKED);
     }
 
-
-
     @RequestMapping("get_cart_product_count.do")
     @ResponseBody
     public ServerResponse<Integer> getCartProductCount(HttpSession session){
@@ -122,9 +113,6 @@ public class CartController {
         return iCartService.getCartProductCount(user.getId());
     }
 
-
-
-
     //全选
     //全反选
 
@@ -132,8 +120,5 @@ public class CartController {
     //单独反选
 
     //查询当前用户的购物车里面的产品数量,如果一个产品有10个,那么数量就是10.
-
-
-
 
 }
