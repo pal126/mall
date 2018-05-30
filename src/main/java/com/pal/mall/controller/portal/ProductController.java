@@ -6,9 +6,7 @@ import com.pal.mall.service.IProductService;
 import com.pal.mall.vo.ProductDetailVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by pal
@@ -20,9 +18,9 @@ public class ProductController {
     @Autowired
     private IProductService iProductService;
 
-    @RequestMapping("detail.do")
+    @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
     @ResponseBody
-    public ServerResponse<ProductDetailVo> detail(Integer productId){
+    public ServerResponse<ProductDetailVo> detail(@PathVariable Integer productId){
         return iProductService.getProductDetail(productId);
     }
 
