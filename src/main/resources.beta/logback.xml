@@ -11,8 +11,7 @@
         </filter>
     </appender>
 
-    <appender name="mmall" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--<File>d:/mmalllog/mmall.log</File>-->
+    <appender name="mall" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${LOG_HOME}/mmall.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_HOME}/mmall.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
@@ -24,13 +23,12 @@
         </encoder>
     </appender>
 
-
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--<File>d:/mmalllog/error.log</File>-->
+        <!--<File>d:/malllog/error.log</File>-->
         <File>${LOG_HOME}/error.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_HOME}/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
-            <!--<fileNamePattern>d:/mmalllog/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>-->
+            <!--<fileNamePattern>d:/malllog/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>-->
             <append>true</append>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -44,17 +42,14 @@
         </filter>
     </appender>
 
-    <logger name="com.mmall" additivity="false" level="INFO" >
-        <appender-ref ref="mmall" />
+    <logger name="com.pal.mall" additivity="false" level="INFO" >
+        <appender-ref ref="mall" />
         <appender-ref ref="console"/>
         <appender-ref ref="error"/>
     </logger>
 
-
-
-    <!-- geelynote mybatis log 日志 -->
-
-    <logger name="com.mmall.dao" level="DEBUG"/>
+    <!-- mybatis log 日志 -->
+    <logger name="com.pal.mall.dao" level="DEBUG"/>
 
     <!--<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" >-->
     <!--<appender-ref ref="console"/>-->
@@ -70,7 +65,6 @@
     <!--<logger name="java.sql.PreparedStatement" level="DEBUG">-->
     <!--<appender-ref ref="console"/>-->
     <!--</logger>-->
-
 
     <root level="DEBUG">
         <appender-ref ref="console"/>

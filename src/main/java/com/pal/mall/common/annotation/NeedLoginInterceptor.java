@@ -1,3 +1,4 @@
+/*
 package com.pal.mall.common.annotation;
 
 import com.alibaba.fastjson.JSON;
@@ -17,7 +18,8 @@ import java.io.OutputStream;
 @Service
 public class NeedLoginInterceptor extends HandlerInterceptorAdapter {
 
-    /**
+    */
+/**
      * 拦截业务处理
      * preHandle在进入controller之前调用
      * @param request request
@@ -25,7 +27,8 @@ public class NeedLoginInterceptor extends HandlerInterceptorAdapter {
      * @param handler handler
      * @return boolean
      * @throws Exception Exception
-     */
+     *//*
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -57,12 +60,14 @@ public class NeedLoginInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-    /**
+    */
+/**
      * 返回消息到前端
      * @param response response
      * @param string string
      * @throws Exception Exception
-     */
+     *//*
+
     private void render(HttpServletResponse response, String string) throws Exception {
         response.reset();
         response.setContentType("application/json;charset=UTF-8");
@@ -74,3 +79,4 @@ public class NeedLoginInterceptor extends HandlerInterceptorAdapter {
     }
 
 }
+*/
